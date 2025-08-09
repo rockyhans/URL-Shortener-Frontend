@@ -1,112 +1,25 @@
-// import React, { useState } from 'react';
-
-// export default function Admin() {
-//   const [password, setPassword] = useState('');
-//   const [urls, setUrls] = useState(null);
-//   const [loading, setLoading] = useState(false);
-//   const API = import.meta.env.VITE_API_BASE_URL || '';
-
-//   const loginAndFetch = async () => {
-//     if (!password) return alert('Enter admin password');
-//     setLoading(true);
-//     try {
-//       const res = await fetch(`${API}/api/admin/urls`, {
-//         headers: { 'x-admin-secret': password }
-//       });
-//       const data = await res.json();
-//       setLoading(false);
-//       if (!res.ok) return alert(data.error || 'Unauthorized');
-//       setUrls(data);
-//     } catch (err) {
-//       setLoading(false);
-//       alert('Network error');
-//     }
-//   };
-
-//   const doDelete = async (shortCode) => {
-//     if (!confirm(`Delete ${shortCode}?`)) return;
-//     try {
-//       await fetch(`${API}/api/admin/urls/${shortCode}`, {
-//         method: 'DELETE',
-//         headers: { 'x-admin-secret': password }
-//       });
-//       setUrls(urls.filter(u => u.shortCode !== shortCode));
-//     } catch (err) {
-//       alert('Delete failed');
-//     }
-//   };
-
-//   return (
-//     <div className="page">
-//       <header><h1>Admin — Shortened URLs</h1></header>
-//       <main className="card">
-//         {!urls ? (
-//           <>
-//             <p>Enter admin password to view all shortened URLs.</p>
-//             <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="input" />
-//             <div style={{marginTop:8}}>
-//               <button className="btn" onClick={loginAndFetch} disabled={loading}>
-//                 {loading ? 'Loading...' : 'Login & Fetch'}
-//               </button>
-//             </div>
-//           </>
-//         ) : (
-//           <>
-//             <table className="table">
-//               <thead>
-//                 <tr>
-//                   <th>Short</th>
-//                   <th>Original URL</th>
-//                   <th>Clicks</th>
-//                   <th>Created</th>
-//                   <th>Last</th>
-//                   <th>Action</th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 {urls.map(u => (
-//                   <tr key={u._id}>
-//                     <td><a href={`/${u.shortCode}`} target="_blank" rel="noreferrer">{u.shortCode}</a></td>
-//                     <td style={{maxWidth: 400, overflow:'hidden', textOverflow:'ellipsis'}}>{u.longUrl}</td>
-//                     <td>{u.clicks || 0}</td>
-//                     <td>{new Date(u.createdAt).toLocaleString()}</td>
-//                     <td>{u.lastVisited ? new Date(u.lastVisited).toLocaleString() : '-'}</td>
-//                     <td><button className="btn small danger" onClick={() => doDelete(u.shortCode)}>Delete</button></td>
-//                   </tr>
-//                 ))}
-//               </tbody>
-//             </table>
-//             <div style={{marginTop:10}}>
-//               <button className="btn" onClick={() => setUrls(null)}>Logout</button>
-//             </div>
-//           </>
-//         )}
-//       </main>
-//     </div>
-//   );
-// }
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export default function Admin() {
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const [urls, setUrls] = useState(null);
   const [loading, setLoading] = useState(false);
-  const API = import.meta.env.VITE_API_BASE_URL || '';
+  const API = import.meta.env.VITE_API_BASE_URL || "";
 
   const loginAndFetch = async () => {
-    if (!password) return alert('Enter admin password');
+    if (!password) return alert("Enter admin password");
     setLoading(true);
     try {
       const res = await fetch(`${API}/api/admin/urls`, {
-        headers: { 'x-admin-secret': password }
+        headers: { "x-admin-secret": password },
       });
       const data = await res.json();
       setLoading(false);
-      if (!res.ok) return alert(data.error || 'Unauthorized');
+      if (!res.ok) return alert(data.error || "Unauthorized");
       setUrls(data);
     } catch (err) {
       setLoading(false);
-      alert('Network error');
+      alert("Network error");
     }
   };
 
@@ -114,12 +27,12 @@ export default function Admin() {
     if (!confirm(`Delete ${shortCode}?`)) return;
     try {
       await fetch(`${API}/api/admin/urls/${shortCode}`, {
-        method: 'DELETE',
-        headers: { 'x-admin-secret': password }
+        method: "DELETE",
+        headers: { "x-admin-secret": password },
       });
-      setUrls(urls.filter(u => u.shortCode !== shortCode));
+      setUrls(urls.filter((u) => u.shortCode !== shortCode));
     } catch (err) {
-      alert('Delete failed');
+      alert("Delete failed");
     }
   };
 
@@ -132,11 +45,13 @@ export default function Admin() {
       <main className="bg-white rounded-xl shadow-lg p-6 w-full max-w-3xl">
         {!urls ? (
           <>
-            <p className="text-gray-600">Enter admin password to view all shortened URLs.</p>
+            <p className="text-gray-600">
+              Enter admin password to view all shortened URLs.
+            </p>
             <input
               type="password"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               className="mt-3 w-full px-4 py-2 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             <div className="mt-3">
@@ -145,7 +60,7 @@ export default function Admin() {
                 disabled={loading}
                 className="px-4 py-2 rounded-lg bg-gray-900 text-white font-medium hover:bg-gray-800 disabled:opacity-50"
               >
-                {loading ? 'Loading...' : 'Login & Fetch'}
+                {loading ? "Loading..." : "Login & Fetch"}
               </button>
             </div>
           </>
@@ -155,25 +70,46 @@ export default function Admin() {
               <table className="min-w-full border-collapse border border-gray-200 mt-4">
                 <thead className="bg-gray-100">
                   <tr>
-                    <th className="px-3 py-2 border-b border-gray-200 text-left">Short</th>
-                    <th className="px-3 py-2 border-b border-gray-200 text-left">Original URL</th>
-                    <th className="px-3 py-2 border-b border-gray-200 text-left">Clicks</th>
-                    <th className="px-3 py-2 border-b border-gray-200 text-left">Created</th>
+                    <th className="px-3 py-2 border-b border-gray-200 text-left">
+                      Short
+                    </th>
+                    <th className="px-3 py-2 border-b border-gray-200 text-left">
+                      Original URL
+                    </th>
+                    <th className="px-3 py-2 border-b border-gray-200 text-left">
+                      Clicks
+                    </th>
+                    <th className="px-3 py-2 border-b border-gray-200 text-left">
+                      Created
+                    </th>
                     {/* <th className="px-3 py-2 border-b border-gray-200 text-left">Last</th> */}
-                    <th className="px-3 py-2 border-b border-gray-200 text-left">Action</th>
+                    <th className="px-3 py-2 border-b border-gray-200 text-left">
+                      Action
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {urls.map(u => (
+                  {urls.map((u) => (
                     <tr key={u._id} className="hover:bg-gray-50">
                       <td className="px-3 py-2 border-b border-gray-200">
-                        <a href={`http://localhost:5000/${u.shortCode}`} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">
+                        <a
+                          href={`http://localhost:5000/${u.shortCode}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-blue-500 hover:underline"
+                        >
                           {u.shortCode}
                         </a>
                       </td>
-                      <td className="px-3 py-2 border-b border-gray-200 max-w-xs truncate">{u.longUrl}</td>
-                      <td className="px-3 py-2 border-b border-gray-200">{u.clicks || 0}</td>
-                      <td className="px-3 py-2 border-b border-gray-200">{new Date(u.createdAt).toLocaleString()}</td>
+                      <td className="px-3 py-2 border-b border-gray-200 max-w-xs truncate">
+                        {u.longUrl}
+                      </td>
+                      <td className="px-3 py-2 border-b border-gray-200">
+                        {u.clicks || 0}
+                      </td>
+                      <td className="px-3 py-2 border-b border-gray-200">
+                        {new Date(u.createdAt).toLocaleString()}
+                      </td>
                       {/* <td className="px-3 py-2 border-b border-gray-200">
                         {u.lastVisited ? new Date(u.lastVisited).toLocaleString() : '-'}
                       </td> */}
