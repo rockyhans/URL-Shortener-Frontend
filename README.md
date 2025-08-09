@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-  <b>This is the **frontend** for the MERN URL Shortener application.  
-Built with **React**, it allows users to submit long URLs, receive shortened links, and (optionally) log in to the **admin page** to manage all URLs.
+  <b>This is the frontend for the MERN URL Shortener application.  
+Built with React, it allows users to submit long URLs, receive shortened links, and (optionally) log in to the admin page to manage all URLs.
   </b>
 </p>
 
@@ -59,8 +59,8 @@ https://url-shortener-frontend-chi-seven.vercel.app
 
 - View, delete, and manage URLs.
 
-## 🔗 API Integration
-### The frontend communicates with the backend API:
+### 🔗 API Integration
+#### The frontend communicates with the backend API:
 
 - POST /api/shorten – Create short URL.
 
@@ -116,7 +116,7 @@ App will be running at:
 <br>
 Frontend → http://localhost:5143
 
-
+---
 
 👤 Contributors
 <table> <tr> <td align="center"> <img src="https://avatars.githubusercontent.com/u/164065390?v=4" width="80px;" alt="Danish Rizwan"/> <br /><sub><b>Danish Rizwan</b></sub><br /> <sub>Full-Stack Developer</sub> </td> </tr> </table>
