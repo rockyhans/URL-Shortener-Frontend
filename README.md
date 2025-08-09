@@ -40,8 +40,7 @@ Built with React, it allows users to submit long URLs, receive shortened links, 
 
 ## 🚀 Live Demo
 
-🌐 **App Link :**  
-https://url-shortener-frontend-chi-seven.vercel.app
+🌐 **App Link :**  https://url-shortener-frontend-chi-seven.vercel.app
 
 ---
 ## 🖥 Usage
